@@ -1,5 +1,6 @@
 package com.jayneel.socialmedia
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,7 +29,10 @@ class SignUp : AppCompatActivity() {
         }
         //signup
         button4.setOnClickListener {
-
+            var progressDialog= ProgressDialog(this)
+            progressDialog.setTitle("It will take some time")
+            progressDialog.setMessage("hello")
+            progressDialog.show()
             var email=signup_email.text.toString()
             var passowed=signup_password.text.toString()
             var username=signup_userrname.text.toString()
@@ -54,12 +58,14 @@ class SignUp : AppCompatActivity() {
                             myref.child(user!!.uid.toString()).setValue(hashMap).addOnCompleteListener {
                                 Toast.makeText(this,"user created",Toast.LENGTH_SHORT).show()
                                 updateUi(user)
+                                progressDialog.dismiss()
                             }
 
                         }
                     }
                         .addOnCanceledListener {
                             Toast.makeText(this,"error try after some time",Toast.LENGTH_LONG).show()
+                            progressDialog.dismiss()
                         }
                 }
             }
