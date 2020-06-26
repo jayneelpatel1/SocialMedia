@@ -1,5 +1,6 @@
 package com.jayneel.socialmedia
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,7 +28,10 @@ class login : AppCompatActivity() {
         }
         //login button
         button2.setOnClickListener {
-
+            var progressDialog=ProgressDialog(this)
+            progressDialog.setTitle("It will take some time")
+            progressDialog.setMessage("hello")
+            progressDialog.show()
             var mauth= FirebaseAuth.getInstance()
             var email=login_email.text.toString()
             var passowed=login_password.text.toString()
@@ -36,8 +40,12 @@ class login : AppCompatActivity() {
                 if(it.isSuccessful) {
                     var user=mauth.currentUser
                     updateUi(user)
+                    progressDialog.dismiss()
                 }
             }
+                .addOnCanceledListener {
+                    progressDialog.dismiss()
+                }
         }
 
     }
