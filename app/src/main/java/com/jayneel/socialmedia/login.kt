@@ -14,7 +14,9 @@ class login : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         var user=FirebaseAuth.getInstance().currentUser
+        if(user!=null){
         updateUi(user)
+        }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
