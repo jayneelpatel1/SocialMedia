@@ -61,7 +61,8 @@
                     android:layout_marginStart="10dp"
                     android:src="@drawable/aman"
                     tools:layout_editor_absoluteX="24dp"
-                    tools:layout_editor_absoluteY="80dp"></de.hdodenhof.circleimageview.CircleImageView>
+                    tools:layout_editor_absoluteY="80dp">
+                </de.hdodenhof.circleimageview.CircleImageView>
 
                 <LinearLayout
                     android:id="@+id/lbldetails"
@@ -132,7 +133,7 @@
                             android:id="@+id/textView8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="38dp"
+                            android:layout_marginStart="48dp"
                             android:layout_marginTop="21dp"
                             android:layout_marginBottom="5dp"
                             android:fontFamily="sans-serif-black"
@@ -180,7 +181,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif"
-                    android:text="Jayneel Patel"
+                    android:text="Aman Tailor"
                     android:textColor="#000000"
                     android:textSize="15dp" />
 
@@ -205,7 +206,9 @@
                 <Button
                     android:id="@+id/btneditprofilr"
                     android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_height="40dp"
+                    android:textColor="#000000"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
