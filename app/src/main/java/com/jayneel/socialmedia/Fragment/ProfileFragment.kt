@@ -43,11 +43,11 @@ class ProfileFragment : Fragment() {
         viewModel.getdata(user!!)?.observe(viewLifecycleOwner, Observer {
             progressBar2.visibility=View.VISIBLE
             profile_full_name.setText(it[0].name)
+            toolbarprofile.title=(it[0].username)
             progressBar2.visibility=View.INVISIBLE
 
         })
-
-               }
+    }
 
 
     }
