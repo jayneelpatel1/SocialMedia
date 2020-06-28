@@ -1,7 +1,6 @@
-package com.jayneel.socialmedia.Fragment
+package com.jayneel.socialmedia
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
@@ -9,11 +8,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.jayneel.socialmedia.Model.userModel
-import kotlinx.android.synthetic.main.profile_fragment.*
 
-class ProfileViewModel : ViewModel() {
+class Edit_ProfileViewModel:ViewModel() {
 
-    lateinit var profiledata: MutableLiveData<List<userModel>>
+
     var data = MutableLiveData<userModel>()
     fun getdata(uid: String): MutableLiveData<userModel>? {
 
@@ -24,9 +22,9 @@ class ProfileViewModel : ViewModel() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated
-                    val value = dataSnapshot.getValue(userModel::class.java)!!
-                    data.value=value
-                    Log.d("TAG", "Value is: $value")
+                val value = dataSnapshot.getValue(userModel::class.java)!!
+                data.value=value
+                Log.d("TAG", "Value is: $value")
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -41,6 +39,3 @@ class ProfileViewModel : ViewModel() {
 
     }
 }
-
-
-
