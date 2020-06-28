@@ -36,7 +36,7 @@ class ProfileViewModel : ViewModel() {
         }
 
 
-        myRef.child(uid).addValueEventListener(userprofile)
+        myRef.child(uid).addListenerForSingleValueEvent(userprofile)
         return data
 
     }
