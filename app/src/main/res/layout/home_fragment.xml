@@ -43,7 +43,7 @@
                     android:layout_toStartOf="@+id/btndone"
                     android:layout_toEndOf="@+id/btnclose"
                     android:fontFamily="@font/dr_sugiyama"
-                    android:text="           Charusat Social"
+                    android:text="          Charusat Social"
                     android:textSize="30dp" />
 
                 <ImageView
