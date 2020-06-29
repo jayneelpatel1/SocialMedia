@@ -30,43 +30,51 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.search_fragment, container, false)
+        val view =inflater.inflate(R.layout.search_fragment, container, false)
+
+    return view
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
 
-        rvsearch.visibility=View.VISIBLE
-        viewModel.getdata()?.observe(viewLifecycleOwner, Observer {list->
-            var ad= context?.applicationContext?.let { user_Apater(it,list) }
-            rvsearch.adapter=ad
-            rvsearch.layoutManager=LinearLayoutManager(context,RecyclerView.VERTICAL,false)
-        })
-        edit_search.addTextChangedListener(object :TextWatcher{
-            override fun afterTextChanged(s: Editable?) {
-                TODO("Not yet implemented")
-            }
+edit_search.setText("")
+        if(edit_search.text!=null) {
+            edit_search.addTextChangedListener(object : TextWatcher {
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                TODO("Not yet implemented")
-            }
+                override fun afterTextChanged(s: Editable?) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-               if(edit_search.text.toString()==""){
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
-               }
-                else
-               {
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s.toString() == "") {
 
-               }
-            }
+                    } else {
+                        rvsearch.visibility = View.VISIBLE
+                        viewModel.getdata(s.toString())
+                            ?.observe(viewLifecycleOwner, Observer { list ->
+                                var ad = context?.applicationContext?.let { user_Apater(it, list) }
+                                rvsearch.adapter = ad
+                                rvsearch.layoutManager =
+                                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                            })
+                    }
 
-        })
+                }
 
+            })
+        }
 
-
-        // TODO: Use the ViewModel
     }
 
 }

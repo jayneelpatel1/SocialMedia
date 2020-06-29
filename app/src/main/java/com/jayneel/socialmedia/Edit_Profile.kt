@@ -22,10 +22,13 @@ class Edit_Profile : AppCompatActivity() {
         viewModel.getdata(user)?.observe(this, Observer {
             edit_name.setText(it.name)
             edit_username.setText(it.username)
+          edit_bio.setText(it.bio)
             edit_website.setText(it.email)
         })
         btndone.setOnClickListener {
-          viewModel.savedata(user,edit_name.text.toString(),edit_bio.text.toString(),edit_username.text.toString())
+          viewModel.savedata(user,edit_name.text.toString(),edit_bio.text.toString(),edit_username.text.toString(),edit_website.text.toString())
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
         }
         btnlogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()

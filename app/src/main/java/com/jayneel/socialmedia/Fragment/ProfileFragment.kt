@@ -66,6 +66,7 @@ class ProfileFragment : Fragment() {
             progressBar2.visibility=View.VISIBLE
             profile_full_name.setText(it.name)
             toolbarprofile.title=(it.username)
+
             progressBar2.visibility=View.INVISIBLE
 
         })

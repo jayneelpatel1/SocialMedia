@@ -11,10 +11,10 @@ import com.jayneel.socialmedia.Model.userModel
 
 class SearchViewModel : ViewModel() {
     var data = MutableLiveData<ArrayList<userModel>>()
-    fun getdata(): MutableLiveData<ArrayList<userModel>>? {
+    fun getdata(input:String): MutableLiveData<ArrayList<userModel>>? {
 
         val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("user")
+        val myRef = database.getReference("user").orderByChild("name").startAt(input).endAt(input+"\uf8ff")
 
         val userprofile=object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -23,7 +23,6 @@ class SearchViewModel : ViewModel() {
                 var v=ArrayList<userModel>()
 
                 for (d in dataSnapshot.children){
-
                    val value = d.getValue(userModel::class.java)!!
                   v.add(value)
                   data.value=v
