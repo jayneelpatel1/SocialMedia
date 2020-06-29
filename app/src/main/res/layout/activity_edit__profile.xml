@@ -60,7 +60,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/aman"
+        android:src="@drawable/person"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"></de.hdodenhof.circleimageview.CircleImageView>
@@ -137,6 +137,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_website"
+            android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Website" />

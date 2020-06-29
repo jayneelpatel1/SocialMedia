@@ -36,7 +36,7 @@
                     android:id="@+id/toolbarprofile"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:title="Jayneelpatel1">
+                    app:title="username">
 
                 </com.google.android.material.appbar.MaterialToolbar>
 
@@ -59,10 +59,9 @@
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_marginStart="10dp"
-                    android:src="@drawable/aman"
+                    android:src="@drawable/person"
                     tools:layout_editor_absoluteX="24dp"
-                    tools:layout_editor_absoluteY="80dp">
-                </de.hdodenhof.circleimageview.CircleImageView>
+                    tools:layout_editor_absoluteY="80dp"></de.hdodenhof.circleimageview.CircleImageView>
 
                 <LinearLayout
                     android:id="@+id/lbldetails"
@@ -181,7 +180,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif"
-                    android:text="Aman Tailor"
+                    android:text="name"
                     android:textColor="#000000"
                     android:textSize="15dp" />
 
@@ -195,12 +194,12 @@
                     android:textSize="15dp" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/profile_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="CCS (charusat_chutya_society) Member"
+                    android:text="charusat.edu.in"
                     android:textSize="15dp" />
 
                 <Button
