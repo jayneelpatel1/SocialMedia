@@ -45,7 +45,7 @@ class SignUp : AppCompatActivity() {
                 TextUtils.isEmpty(name)->Toast.makeText(this,"Enter full name",Toast.LENGTH_LONG).show()
                 else->{
                     var mauth=FirebaseAuth.getInstance()
-                    mauth.createUserWithEmailAndPassword(email,passowed).addOnCompleteListener {
+                    mauth.createUserWithEmailAndPassword(email,passowed).addOnCompleteListener {it->
                         if (it.isSuccessful){
                             var user=mauth.currentUser
                             var hashMap=HashMap<String,Any>()
@@ -60,6 +60,9 @@ class SignUp : AppCompatActivity() {
                                 updateUi(user)
                                 progressDialog.dismiss()
                             }
+
+                        }
+                        else{
 
                         }
                     }
