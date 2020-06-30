@@ -37,11 +37,12 @@ class user_Apater(var ctx:Context,var list: ArrayList<userModel>,var isFragment:
     }
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
-
+        chkfollowingstatus(list[position].uid.toString(),holder.btn)
         holder.usernmae.setText(list[position].username)
         holder.email.setText(list[position].email)
         holder.btn.setOnClickListener {
             chkfollowingstatus(list[position].uid.toString(),holder.btn)
+
             if(holder.btn.text=="Follow"){
                 myRef.child(FirebaseUser!!.uid).child("Following").child(list[position].uid.toString()).setValue(true)
                     .addOnCompleteListener {task->
@@ -64,7 +65,7 @@ class user_Apater(var ctx:Context,var list: ArrayList<userModel>,var isFragment:
     }
 
     private fun chkfollowingstatus(uid: String, btn: MaterialButton?) {
-        var followingref=  myRef.child(FirebaseUser!!.uid).child("Following")
+        var followingref=myRef.child(FirebaseUser!!.uid).child("Following")
         followingref.addValueEventListener(object :ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
