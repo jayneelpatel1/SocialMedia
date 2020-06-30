@@ -15,6 +15,7 @@ class user_Apater(var ctx:Context,var list: ArrayList<userModel>,var isFragment:
         var usernmae=v.user_iteam_text
         var img=v.user_iteam_img
         var btn=v.user_btnFollow
+        var email=v.txtemail
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewholder {
@@ -27,6 +28,7 @@ class user_Apater(var ctx:Context,var list: ArrayList<userModel>,var isFragment:
     }
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
-    holder.usernmae.setText(list[position].username)
+        holder.usernmae.setText(list[position].username)
+        holder.email.setText(list[position].email)
     }
 }

@@ -18,7 +18,6 @@ class Edit_ProfileViewModel:ViewModel() {
     var data = MutableLiveData<userModel>()
     val myRef = database.getReference("user")
     fun getdata(uid: String): MutableLiveData<userModel>? {
-
         val userprofile=object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(userModel::class.java)!!
