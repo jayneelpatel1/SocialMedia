@@ -32,19 +32,21 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/user_btnFollow"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:text="Follow"
-        android:theme="@style/Theme.MaterialComponents.Light"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:theme="@style/Theme.MaterialComponents.Light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.819"
-        app:layout_constraintStart_toEndOf="@+id/txtemail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toEndOf="@+id/user_iteam_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.416" />
 
     <TextView
         android:id="@+id/txtemail"
