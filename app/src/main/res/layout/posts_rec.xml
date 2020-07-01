@@ -12,6 +12,9 @@
         android:layout_margin="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#FFC2BDBF"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +29,7 @@
             <ImageView
                 android:id="@+id/profilr_poast_img"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/aman" />
 
@@ -52,7 +55,7 @@
                     android:layout_marginTop="20dp"
                     android:text="_aman_tailor"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textSize="17dp" />
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
