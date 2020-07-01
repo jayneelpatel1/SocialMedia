@@ -1,6 +1,8 @@
 package com.jayneel.socialmedia.Fragment
 
 import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,9 +17,12 @@ class ProfileViewModel : ViewModel() {
 
     lateinit var profiledata: MutableLiveData<List<userModel>>
     var data = MutableLiveData<userModel>()
+    var follower = MutableLiveData<String>()
+    var following = MutableLiveData<String>()
+    val database = FirebaseDatabase.getInstance()
+
     fun getdata(uid: String): MutableLiveData<userModel>? {
 
-        val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("user")
 
         val userprofile=object : ValueEventListener {
@@ -39,6 +44,42 @@ class ProfileViewModel : ViewModel() {
         myRef.child(uid).addListenerForSingleValueEvent(userprofile)
         return data
 
+    }
+    fun getfollower(uid:String):MutableLiveData<String>{
+        val myRef = database.getReference("Follow")
+        myRef.child(uid).child("Followers").addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists())
+                {
+                   follower.value=snapshot.childrenCount.toString()
+                }
+            }
+
+        })
+
+        return follower
+    }
+    fun getfollowing(uid:String):MutableLiveData<String>{
+        val myRef = database.getReference("Follow")
+        myRef.child(uid).child("Following").addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists())
+                {
+                    following.value=snapshot.childrenCount.toString()
+                }
+            }
+
+        })
+
+        return following
     }
 }
 
