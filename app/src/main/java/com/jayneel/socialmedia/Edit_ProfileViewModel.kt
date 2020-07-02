@@ -29,8 +29,19 @@ class Edit_ProfileViewModel:ViewModel() {
                 Log.w("TAG", "Failed to read value.", error.toException())
             }
         }
-        myRef.child(uid).addValueEventListener(userprofile)
+        myRef.child(uid).addListenerForSingleValueEvent(userprofile)
         return data
+    }
+    fun savedataonly(uid: String,name:String,bio:String,username:String,email:String,img:String){
+        val user=HashMap<String,Any>()
+        user["name"]=name
+        user["uid"]=uid
+        user["bio"]=bio
+        user["email"]=email
+        user["username"]=username
+        user["img"]=img
+
+        myRef.child(uid).setValue(user)
     }
     fun savedata(uid: String,name:String,bio:String,username:String,email:String,img:String){
         val user=HashMap<String,Any>()

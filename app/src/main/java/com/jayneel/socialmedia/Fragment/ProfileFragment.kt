@@ -38,8 +38,7 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)
-        sp?.getString("profileid",user)
+
 
 
 
