@@ -9,10 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import com.jayneel.socialmedia.Edit_Profile
 import com.jayneel.socialmedia.R
 import com.jayneel.socialmedia.login
+import kotlinx.android.synthetic.main.activity_edit__profile.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 
 
@@ -67,6 +70,14 @@ viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
             progressBar2.visibility=View.VISIBLE
             profile_full_name.setText(it.name)
             toolbarprofile.title=(it.username)
+            if(it.img!="") {
+                val storage = FirebaseStorage.getInstance()
+                val storageReference = storage.getReferenceFromUrl(it.img!!)
+
+                storageReference.downloadUrl.addOnSuccessListener {
+                    Glide.with(this).load(it.toString()).into(circleImageView).view
+                }
+            }
 
             progressBar2.visibility=View.INVISIBLE
 

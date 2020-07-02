@@ -28,7 +28,7 @@ class visiterProfile : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(VisiterProfileViewModel::class.java)
-        toolbarprofile.title=context!!.getSharedPreferences("sp",Context.MODE_PRIVATE).getString("username  ","nouserfound").toString()
+        toolbarprofile.title=context!!.getSharedPreferences("sp",Context.MODE_PRIVATE).getString("username    ","nouserfound").toString()
     }
 
 }

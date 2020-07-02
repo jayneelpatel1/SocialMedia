@@ -32,13 +32,14 @@ class Edit_ProfileViewModel:ViewModel() {
         myRef.child(uid).addValueEventListener(userprofile)
         return data
     }
-    fun savedata(uid: String,name:String,bio:String,username:String,email:String){
+    fun savedata(uid: String,name:String,bio:String,username:String,email:String,img:String){
         val user=HashMap<String,Any>()
         user["name"]=name
         user["uid"]=uid
         user["bio"]=bio
         user["email"]=email
         user["username"]=username
+        user["img"]=img
         myRef.child(uid).setValue(user)
     }
 }
