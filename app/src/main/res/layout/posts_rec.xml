@@ -9,15 +9,11 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="#FFC2BDBF"
-        app:cardElevation="0dp"
+        android:layout_margin="0dp"
         android:outlineSpotShadowColor="@color/colorBlue"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,6 +29,7 @@
                 android:id="@+id/profilr_poast_img"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:outlineSpotShadowColor="@color/colorBlue"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/bg" />
 
@@ -40,12 +37,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="0dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/post_profile_img"
                     android:layout_width="50dp"
                     android:layout_height="60dp"
+                    android:paddingLeft="10dp"
                     android:src="@drawable/person">
 
                 </de.hdodenhof.circleimageview.CircleImageView>
@@ -82,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="#Hello_Charusat"
+                    android:text="#Hello_Charusat #charusat_social_media #Android_app"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
 
@@ -101,11 +99,29 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_baseline_favorite_border_24"></ImageButton>
 
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="1dp"
+                    android:text="300"
+                    android:textColor="#000" />
+
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/ic_baseline_chat_24"></ImageButton>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="1dp"
+                    android:text="42"
+                    android:textColor="#000" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
