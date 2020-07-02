@@ -38,8 +38,7 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)
-        sp?.getString("profileid",user)
+
 
 
 
@@ -70,6 +69,7 @@ viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
             progressBar2.visibility=View.VISIBLE
             profile_full_name.setText(it.name)
             toolbarprofile.title=(it.username)
+            profile_email.setText(it.email)
             if(it.img!="") {
                 val storage = FirebaseStorage.getInstance()
                 val storageReference = storage.getReferenceFromUrl(it.img!!)
