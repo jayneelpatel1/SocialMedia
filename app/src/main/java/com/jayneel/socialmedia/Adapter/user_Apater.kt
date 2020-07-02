@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -14,11 +15,13 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.jayneel.socialmedia.Fragment.NotificationFragment
 import com.jayneel.socialmedia.Fragment.ProfileFragment
 import com.jayneel.socialmedia.Fragment.visiterProfile
 import com.jayneel.socialmedia.Model.userModel
 import com.jayneel.socialmedia.R
+import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.user_iteam_layout.view.*
 
 class user_Apater(var ctx:Context,var list: ArrayList<userModel>,var isFragment:Boolean=false):RecyclerView.Adapter<user_Apater.viewholder>() {
@@ -44,6 +47,14 @@ class user_Apater(var ctx:Context,var list: ArrayList<userModel>,var isFragment:
         chkfollowingstatus(list[position].uid.toString(),holder.btn)
         holder.usernmae.setText(list[position].username)
         holder.email.setText(list[position].email)
+        if(list[position].img!="") {
+            val storage = FirebaseStorage.getInstance()
+            val storageReference = storage.getReferenceFromUrl(list[position].img!!)
+
+            storageReference.downloadUrl.addOnSuccessListener {
+                Glide.with(ctx).load(it.toString()).into(holder.img).view
+            }
+        }
         holder.itemView.setOnClickListener {
             var sp=ctx.getSharedPreferences("sp",Context.MODE_PRIVATE).edit()
             sp.putString("profileid",list[position].uid)
