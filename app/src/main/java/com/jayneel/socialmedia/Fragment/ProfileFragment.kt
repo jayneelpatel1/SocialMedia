@@ -1,5 +1,6 @@
 package com.jayneel.socialmedia.Fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,12 +31,15 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.profile_fragment, container, false)
     }
 
-    
+    var user=FirebaseAuth.getInstance().currentUser?.uid
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        // TODO: Use the ViewModel
-        var user=FirebaseAuth.getInstance().currentUser?.uid
+        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)
+        sp?.getString("profileid",user)
+
+
+
 
         btneditprofilr.setOnClickListener {
             startActivity(Intent(context,Edit_Profile::class.java))
@@ -69,7 +73,31 @@ viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
         })
     }
 
+    override fun onStop() {
+        super.onStop()
+        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)?.edit()
+        sp?.putString("profileid",user)
+        sp?.apply()
+        sp?.commit()
 
+    }
 
+    override fun onPause() {
+        super.onPause()
+        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)!!.edit()
+        sp.putString("profileid",user)
+        sp.apply()
+        sp.commit()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)!!.edit()
+        sp.putString("profileid",user)
+        sp.apply()
+        sp.commit()
+
+    }
     }
 

@@ -63,7 +63,7 @@ edit_search.setText("")
                         rvsearch.visibility = View.VISIBLE
                         viewModel.getdata(s.toString())
                             ?.observe(viewLifecycleOwner, Observer { list ->
-                                var ad = context?.applicationContext?.let { user_Apater(it, list) }
+                                var ad = context?.let { user_Apater(it, list) }
                                 rvsearch.adapter = ad
                                 rvsearch.layoutManager =
                                     LinearLayoutManager(context, RecyclerView.VERTICAL, false)
