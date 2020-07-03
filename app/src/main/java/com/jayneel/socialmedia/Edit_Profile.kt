@@ -111,7 +111,7 @@ class Edit_Profile : AppCompatActivity() {
         }
         btnlogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this,SignUp::class.java))
+            startActivity(Intent(this,login::class.java))
             finish()
 
         }

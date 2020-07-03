@@ -42,6 +42,8 @@ class login : AppCompatActivity() {
                     updateUi(user)
                     progressDialog.dismiss()
                 }
+                else
+                    progressDialog.dismiss()
             }
                 .addOnCanceledListener {
                     progressDialog.dismiss()
