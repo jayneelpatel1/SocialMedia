@@ -6,6 +6,9 @@ import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.material.button.MaterialButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -17,8 +20,10 @@ import kotlinx.android.synthetic.main.visiter_profile_fragment.view.*
 class VisiterProfileViewModel : ViewModel() {
     var data = MutableLiveData<userModel>()
     var follower = MutableLiveData<String>()
+    var btnStatus = MutableLiveData<String>()
     var following = MutableLiveData<String>()
     val database = FirebaseDatabase.getInstance()
+
     fun getdata(uid: String): MutableLiveData<userModel>? {
 
         val myRef = database.getReference("user")
@@ -78,6 +83,27 @@ class VisiterProfileViewModel : ViewModel() {
         })
 
         return following
+    }
+   fun chkfollowingstatus(uid: String, btn: MaterialButton?) {
+        val myRef = database.getReference("Follow")
+        var followingref=myRef.child(FirebaseAuth.getInstance().currentUser!!.uid).child("Following")
+        followingref.addValueEventListener(object :ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.child(uid).exists()){
+                    btn!!.text="UnFollow"
+                }
+                else
+                {
+                    btn!!.text="Follow"
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+
+        })
+
     }
 
 }

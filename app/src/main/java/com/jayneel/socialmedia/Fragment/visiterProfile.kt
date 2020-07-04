@@ -41,6 +41,7 @@ class visiterProfile : Fragment() {
         viewModel = ViewModelProviders.of(this).get(VisiterProfileViewModel::class.java)
         viewModel.getdata(uid!!)!!.observe(viewLifecycleOwner, Observer {
             vister_username.setText(it.username)
+            visitor_email.setText(it.email)
             if(it.img!="") {
                 val storage = FirebaseStorage.getInstance()
                 val storageReference = storage.getReferenceFromUrl(it.img!!)
@@ -56,6 +57,7 @@ class visiterProfile : Fragment() {
         viewModel.getfollower(uid!!).observe(viewLifecycleOwner, Observer {
             visitor_follower_count.setText(it)
         })
+        viewModel.chkfollowingstatus(uid!!,visiter_btn_follow!!)
     }
 
 
