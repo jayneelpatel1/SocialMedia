@@ -71,6 +71,7 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
                         Glide.with(ctx).load(it.toString()).into(profileimg).view
                     }
                 }
+                usernmae!!.setText(value!!.username)
             }
 
         })
