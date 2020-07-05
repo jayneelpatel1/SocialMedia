@@ -25,7 +25,7 @@
                 android:layout_weight="30">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_photo"
+                    android:id="@+id/circleImageView2"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_alignParentEnd="true"
@@ -60,7 +60,7 @@
             android:padding="15dp">
 
             <TextView
-                android:id="@+id/display_name"
+                android:id="@+id/vister_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="User Name"
@@ -71,7 +71,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
@@ -81,7 +81,7 @@
                 android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/website"
+                android:id="@+id/visitor_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"

@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.jayneel.socialmedia.R
+import kotlinx.android.synthetic.main.center_profile.*
+import kotlinx.android.synthetic.main.follower_top_profile.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.visiter_profile_fragment.*
 
