@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.jayneel.socialmedia.Fragment.visiterProfile
 import com.jayneel.socialmedia.Model.PoastData
 import com.jayneel.socialmedia.Model.userModel
 import com.jayneel.socialmedia.R
@@ -45,7 +47,6 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
 
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
-        holder.usernmae.setText(list[position].username.toString())
         if(list[position].img!=null){
             val storage = FirebaseStorage.getInstance()
             val storageReference = storage.getReferenceFromUrl(list[position].img!!)
@@ -55,6 +56,17 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
         }
         holder.caption.setText(list[position].disc.toString())
         postuserinfo(holder.profileimg,holder.usernmae,list[position].uid!!)
+        holder.usernmae.setOnClickListener {
+            var sp=ctx.getSharedPreferences("sp",Context.MODE_PRIVATE).edit()
+            sp.putString("profileid",list[position].uid)
+            sp.putString("username",list[position].username)
+            sp.apply()
+            sp.commit()
+
+            (ctx as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.fragnent_container,
+                visiterProfile()
+            ).commit()
+        }
     }
 
     private fun postuserinfo(profileimg: CircleImageView?, usernmae: TextView?,uid:String) {
