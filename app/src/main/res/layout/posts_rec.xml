@@ -12,7 +12,6 @@
         android:layout_margin="0dp"
         android:outlineSpotShadowColor="@color/colorBlue"
         android:scrollbarAlwaysDrawVerticalTrack="true"
-        app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,13 +24,13 @@
             android:orientation="vertical">
 
             <!-- Media -->
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profilr_poast_img"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="410dp"
                 android:outlineSpotShadowColor="@color/colorBlue"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/bg" />
+                android:scaleType="centerCrop"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,10 +84,16 @@
                 android:layout_margin="8dp"
                 android:orientation="horizontal"
                 android:padding="5dp">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_baseline_favorite_24"
+                    android:visibility="invisible"></ImageButton>
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="-23dp"
                     android:background="@drawable/ic_baseline_favorite_border_24"></ImageButton>
 
                 <TextView
