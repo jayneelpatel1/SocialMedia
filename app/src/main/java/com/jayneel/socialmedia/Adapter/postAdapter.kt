@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.jayneel.socialmedia.Model.PoastData
 import com.jayneel.socialmedia.Model.userModel
 import com.jayneel.socialmedia.R
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.posts_rec.view.*
 import kotlinx.android.synthetic.main.user_iteam_layout.view.*
 
@@ -45,13 +47,33 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
         if(list[position].img!=null){
             val storage = FirebaseStorage.getInstance()
             val storageReference = storage.getReferenceFromUrl(list[position].img!!)
-
             storageReference.downloadUrl.addOnSuccessListener {
                 Glide.with(ctx).load(it.toString()).into(holder.img).view
             }
         }
-
         holder.caption.setText(list[position].disc.toString())
+        postuserinfo(holder.profileimg,holder.usernmae,list[position].uid!!)
+    }
+
+    private fun postuserinfo(profileimg: CircleImageView?, usernmae: TextView?,uid:String) {
+        var myRef=FirebaseDatabase.getInstance().getReference("user")
+        myRef.child(uid).addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value=snapshot.getValue(userModel::class.java)
+                if (profileimg != null) {
+                    val storage = FirebaseStorage.getInstance()
+                    val storageReference = value?.img?.let { storage.getReferenceFromUrl(it) }
+                    storageReference!!.downloadUrl.addOnSuccessListener {
+                        Glide.with(ctx).load(it.toString()).into(profileimg).view
+                    }
+                }
+            }
+
+        })
     }
 
 }
