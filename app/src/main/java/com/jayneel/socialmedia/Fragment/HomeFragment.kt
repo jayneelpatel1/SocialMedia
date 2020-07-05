@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         // TODO: Use the ViewMode
             viewModel.getpost().observe(viewLifecycleOwner, Observer {
+                it.reverse()
                 var ad=postAdapter(context!!,it)
                 rvpost.adapter = ad
                     rvpost.layoutManager=LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)

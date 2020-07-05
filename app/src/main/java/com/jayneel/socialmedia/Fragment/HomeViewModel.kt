@@ -26,8 +26,10 @@ class HomeViewModel : ViewModel() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated
-                var arlis=ArrayList<PoastData>()
 
+                var arlis=ArrayList<PoastData>()
+                arlis.clear()
+                var count=dataSnapshot.childrenCount.toInt()
                 for(snap in dataSnapshot.children){
                     val value = snap.getValue(PoastData::class.java)!!
                     for (follow in following.value!!.iterator()){
