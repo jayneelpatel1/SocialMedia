@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_addpost -> {
-                movetoFragment( AddPoastFragment())
-                it.setChecked(true)
+                it.setChecked(false)
+                startActivity(Intent(this,Add_Post::class.java))
                 true
             }
             R.id.action_search -> {
