@@ -24,7 +24,7 @@
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_marginStart="15dp"
-                    android:id="@+id/username"/>
+                    android:id="@+id/vister_username"/>
 
                 <ImageView
                     android:layout_width="30dp"
