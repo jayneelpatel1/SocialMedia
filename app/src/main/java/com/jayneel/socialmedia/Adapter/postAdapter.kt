@@ -50,6 +50,7 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
                 Glide.with(ctx).load(it.toString()).into(holder.img).view
             }
         }
+
         holder.caption.setText(list[position].disc.toString())
     }
 

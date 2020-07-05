@@ -34,11 +34,11 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.profile_fragment, container, false)
     }
 
-    var user=FirebaseAuth.getInstance().currentUser?.uid
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
 
+        var user=FirebaseAuth.getInstance().currentUser?.uid
 
 
 
@@ -46,18 +46,7 @@ class ProfileFragment : Fragment() {
         btneditprofilr.setOnClickListener {
             startActivity(Intent(context,Edit_Profile::class.java))
         }
-        nav.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.action_logout->{
-                    var mauth=FirebaseAuth.getInstance()
-                    mauth.signOut()
-                    startActivity(Intent(context,login::class.java))
 
-                    true
-                }
-                else->true
-            }
-        }
 
 viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
     profile_follower_count.setText(it)
@@ -79,36 +68,10 @@ viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
                 }
             }
 
-            progressBar2.visibility=View.INVISIBLE
+            progressBar2.visibility=View.GONE
 
         })
     }
 
-    override fun onStop() {
-        super.onStop()
-        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)?.edit()
-        sp?.putString("profileid",user)
-        sp?.apply()
-        sp?.commit()
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)!!.edit()
-        sp.putString("profileid",user)
-        sp.apply()
-        sp.commit()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        var sp=context?.getSharedPreferences("sp",Context.MODE_PRIVATE)!!.edit()
-        sp.putString("profileid",user)
-        sp.apply()
-        sp.commit()
-
-    }
-    }
+}
 
