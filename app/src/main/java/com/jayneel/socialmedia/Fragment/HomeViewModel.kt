@@ -33,7 +33,7 @@ class HomeViewModel : ViewModel() {
                 for(snap in dataSnapshot.children){
                     val value = snap.getValue(PoastData::class.java)!!
                     for (follow in following.value!!.iterator()){
-                        if (value.uid.toString().equals(follow) || value.uid.toString().equals(firebaseuser!!.uid)){
+                        if (value.uid.toString().equals(follow)){
                             arlis.add(value)
                             Log.d("TAG", "Value is: $value")
                         }

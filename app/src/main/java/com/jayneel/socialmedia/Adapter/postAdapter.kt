@@ -1,6 +1,8 @@
 package com.jayneel.socialmedia.Adapter
 
 import android.content.Context
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +71,7 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
                     val storageReference = value?.img?.let { storage.getReferenceFromUrl(it) }
                     storageReference!!.downloadUrl.addOnSuccessListener {
                         Glide.with(ctx).load(it.toString()).into(profileimg).view
+                        Log.d("at post uer","posd user")
                     }
                 }
                 usernmae!!.setText(value!!.username)
