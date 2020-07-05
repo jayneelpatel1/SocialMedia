@@ -4,13 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.jayneel.socialmedia.Model.PoastData
 import com.jayneel.socialmedia.Model.userModel
 import com.jayneel.socialmedia.R
@@ -21,6 +24,9 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
 
     inner class viewholder(v: View): RecyclerView.ViewHolder(v){
         var usernmae=v.post_username
+        var img=v.profilr_poast_img
+        var caption=v.post_caption
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewholder {
@@ -34,7 +40,16 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
 
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
-        holder.usernmae.setText(list[position].username)
+        holder.usernmae.setText(list[position].username.toString())
+        if(list[position].img!=null){
+            val storage = FirebaseStorage.getInstance()
+            val storageReference = storage.getReferenceFromUrl(list[position].img!!)
+
+            storageReference.downloadUrl.addOnSuccessListener {
+                Glide.with(ctx).load(it.toString()).into(holder.img).view
+            }
+        }
+        holder.caption.setText(list[position].disc.toString())
     }
 
 }

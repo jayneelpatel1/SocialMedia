@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jayneel.socialmedia.Adapter.postAdapter
@@ -37,16 +38,13 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
-        var user=ArrayList<PoastData>()
-        user.add(PoastData("aman","",""))
-        user.add(PoastData("jayneel","",""))
-        user.add(PoastData("hetvi","",""))
-        user.add(PoastData("janvi","",""))
-        user.add(PoastData("harsh","",""))
-        var ad =  postAdapter(context!!, user)
-        rvpost.adapter = ad
-        rvpost.layoutManager =LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)
+        // TODO: Use the ViewMode
+            viewModel.getpost().observe(viewLifecycleOwner, Observer {
+                var ad=postAdapter(context!!,it)
+                rvpost.adapter = ad
+                    rvpost.layoutManager=LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)
+            })
+        }
+
     }
 
-}
