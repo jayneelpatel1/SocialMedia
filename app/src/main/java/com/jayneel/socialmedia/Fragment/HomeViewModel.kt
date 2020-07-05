@@ -37,8 +37,11 @@ class HomeViewModel : ViewModel() {
                             arlis.add(value)
                             Log.d("TAG", "Value is: $value")
                         }
-                    }
 
+                    }
+                    if (value.uid.toString().equals(firebaseuser!!.uid)){
+                        arlis.add(value)
+                    }
                 }
                 data.value=arlis
             }
