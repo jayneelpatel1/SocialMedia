@@ -25,6 +25,8 @@ import java.util.*
 class Add_Post : AppCompatActivity() {
     var imaguri:Uri?=null
     var username:String?=null
+    var profilepic:String?=null
+
    var firebaseuid= FirebaseAuth.getInstance().currentUser!!.uid
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,7 @@ class Add_Post : AppCompatActivity() {
         val viewModel= ViewModelProviders.of(this).get(Add_PostViewModel::class.java)
         viewModel.getdata(firebaseuid)?.observe(this, androidx.lifecycle.Observer {
           username=it.username
+            profilepic=it.img
         })
         upload_img_add_post.setOnClickListener {
             CropImage.activity().setAspectRatio(1,1).start(this)

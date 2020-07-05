@@ -26,6 +26,7 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
         var usernmae=v.post_username
         var img=v.profilr_poast_img
         var caption=v.post_caption
+        var profileimg=v.post_profile_img
 
     }
 
