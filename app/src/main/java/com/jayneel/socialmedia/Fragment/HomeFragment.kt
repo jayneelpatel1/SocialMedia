@@ -47,13 +47,9 @@ class HomeFragment : Fragment() {
         })
         refreslayout.setOnRefreshListener {
             refreslayout.isRefreshing=true
-            viewModel.getpost().observe(viewLifecycleOwner, Observer {
-                refreslayout.isRefreshing=false
-                it.reverse()
-                var ad=postAdapter(context!!,it)
-                rvpost.adapter = ad
-                rvpost.layoutManager=LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)
-            })
+            viewModel.getpost()
+            refreslayout.isRefreshing=false
+
 
         }
         }
