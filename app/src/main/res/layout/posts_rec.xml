@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
-                    android:text="_aman_tailor"
+                    android:text=""
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textSize="15dp" />
 
@@ -94,18 +94,19 @@
                     android:visibility="invisible"></ImageButton>
 
                 <ImageButton
+                    android:id="@+id/likebtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-23dp"
                     android:background="@drawable/ic_baseline_favorite_border_24"></ImageButton>
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/nolike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="1dp"
-                    android:text="300"
+                    android:text="0"
                     android:textColor="#000" />
 
                 <ImageButton
@@ -120,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="1dp"
-                    android:text="42"
+                    android:text="0"
                     android:textColor="#000" />
 
                 <ImageButton

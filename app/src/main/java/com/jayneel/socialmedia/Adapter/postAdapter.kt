@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +33,10 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
     inner class viewholder(v: View): RecyclerView.ViewHolder(v){
         var usernmae=v.post_username
         var img=v.profilr_poast_img
+        var btnlike=v.likebtn
         var caption=v.post_caption
+        var likes=v.nolike
+
         var profileimg=v.post_profile_img
 
     }
@@ -47,6 +52,7 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
 
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
+        var post=list[position]
         if(list[position].img!=null){
             val storage = FirebaseStorage.getInstance()
             val storageReference = storage.getReferenceFromUrl(list[position].img!!)
@@ -67,6 +73,63 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
                 visiterProfile()
             ).commit()
         }
+        getlike(holder.btnlike,post.postid)
+        holder.btnlike.setOnClickListener {
+         //   Toast.makeText(ctx,"hello",Toast.LENGTH_LONG).show()
+            if(holder.btnlike.tag.equals("Like")){
+                var myRef=FirebaseDatabase.getInstance().getReference("Post")
+                myRef.child(list[position].postid!!).child("likes").child(uid).setValue(true)
+            }
+            else
+            {
+                var myRef=FirebaseDatabase.getInstance().getReference("Post")
+                myRef.child(list[position].postid.toString()).child("likes").child(uid).removeValue()
+            }
+            getlike(holder.btnlike,post.postid)
+            likecount(post.postid,holder.likes)
+
+
+
+        }
+        likecount(post.postid,holder.likes)
+    }
+
+    private fun likecount(postid: String?, likes: TextView?) {
+        var myRef=FirebaseDatabase.getInstance().getReference("Post")
+        myRef.child(postid.toString()).child("likes").addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                likes!!.setText(snapshot.childrenCount.toString())
+            }
+
+        })
+    }
+
+
+    var uid=FirebaseAuth.getInstance().currentUser!!.uid
+
+    private fun getlike(btnlike: ImageButton?, poastid: String?) {
+        var myRef=FirebaseDatabase.getInstance().getReference("Post")
+        myRef.child(poastid!!).child("likes").addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.child(uid).exists()){
+                    btnlike!!.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                    btnlike.tag="Liked"
+                }
+                else{
+                    btnlike!!.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+                    btnlike.tag="Like"
+                }
+            }
+
+        })
     }
 
     private fun postuserinfo(profileimg: CircleImageView?, usernmae: TextView?,uid:String) {

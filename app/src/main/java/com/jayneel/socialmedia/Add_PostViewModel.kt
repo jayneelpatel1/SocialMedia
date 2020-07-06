@@ -1,6 +1,7 @@
 package com.jayneel.socialmedia
 
 import android.util.Log
+import android.util.TimeUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
@@ -8,6 +9,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.jayneel.socialmedia.Model.userModel
+import java.sql.Timestamp
+import java.time.LocalDateTime
 
 class Add_PostViewModel:ViewModel() {
     val database = FirebaseDatabase.getInstance()
@@ -19,6 +22,7 @@ class Add_PostViewModel:ViewModel() {
         val Post=HashMap<String,Any>()
         Post["uid"]=uid
         Post["disc"]=dis
+        Post["dateTime"]=LocalDateTime.now().toString()
         Post["username"]=username
         Post["img"]=img
         Post["postid"]=postid

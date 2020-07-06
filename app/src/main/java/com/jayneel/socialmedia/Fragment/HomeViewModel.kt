@@ -23,7 +23,7 @@ class HomeViewModel : ViewModel() {
     fun getpost(ref: SwipeRefreshLayout?):MutableLiveData<ArrayList<PoastData>>{
 
         var r=getfollowin()
-        val myRef = database.getReference("Post")
+        val myRef = database.getReference("Post").limitToFirst(3)
         val post=object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
