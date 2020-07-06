@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,14 +20,17 @@ class HomeViewModel : ViewModel() {
     val database = FirebaseDatabase.getInstance()
     var firebaseuser=FirebaseAuth.getInstance().currentUser
     var following=MutableLiveData<ArrayList<String>>()
-    fun getpost():MutableLiveData<ArrayList<PoastData>>{
+    fun getpost(ref: SwipeRefreshLayout?):MutableLiveData<ArrayList<PoastData>>{
+
         var r=getfollowin()
         val myRef = database.getReference("Post")
         val post=object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated
-
+                if (ref != null) {
+                    ref.isRefreshing=true
+                }
                 var arlis=ArrayList<PoastData>()
                 arlis.clear()
                 var count=dataSnapshot.childrenCount.toInt()
@@ -42,6 +46,9 @@ class HomeViewModel : ViewModel() {
                     if (value.uid.toString().equals(firebaseuser!!.uid)){
                         arlis.add(value)
                     }
+                }
+                if (ref != null) {
+                    ref.isRefreshing=false
                 }
                 data.value=arlis
             }
