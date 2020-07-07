@@ -55,7 +55,6 @@
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_marginStart="10dp"
-                    android:src="@drawable/person"
                     tools:layout_editor_absoluteX="24dp"
                     tools:layout_editor_absoluteY="80dp"></de.hdodenhof.circleimageview.CircleImageView>
 

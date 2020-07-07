@@ -33,13 +33,11 @@
                     android:src="@drawable/ic_baseline_close_24"></ImageView>
 
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:id="@+id/textView6"
                     android:layout_width="133dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="145dp"
+                    android:layout_marginLeft="40dp"
+                    android:padding="1dp"
                     android:layout_toStartOf="@+id/btndone"
                     android:fontFamily="sans-serif-black"
                     android:text="New Post" />
@@ -53,10 +51,10 @@
 
     <ImageView
         android:id="@+id/upload_img_add_post"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="406dp"
+        android:layout_height="422dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/uploadomg"
+        android:src="@drawable/bgdo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
@@ -88,5 +86,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_captionj" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
