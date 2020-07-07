@@ -53,7 +53,7 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
         var post=list[position]
-        if(list[position].img!=null){
+        if(list[position].img!=""){
             val storage = FirebaseStorage.getInstance()
             val storageReference = storage.getReferenceFromUrl(list[position].img!!)
             storageReference.downloadUrl.addOnSuccessListener {

@@ -10,6 +10,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.jayneel.socialmedia.Adapter.postAdapter
+import com.jayneel.socialmedia.Model.PoastData
 import com.jayneel.socialmedia.Model.userModel
 import kotlinx.android.synthetic.main.profile_fragment.*
 
@@ -20,6 +22,8 @@ class ProfileViewModel : ViewModel() {
     var follower = MutableLiveData<String>()
     var following = MutableLiveData<String>()
     val database = FirebaseDatabase.getInstance()
+    var post= MutableLiveData<ArrayList<PoastData>>()
+
 
     fun getdata(uid: String): MutableLiveData<userModel>? {
 
@@ -45,6 +49,28 @@ class ProfileViewModel : ViewModel() {
         return data
 
     }
+    fun getposts(uid: String):MutableLiveData<ArrayList<PoastData>> {
+        val myRef = database.getReference("Post")
+        myRef.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var arlist=ArrayList<PoastData>()
+                for(keys in snapshot.children){
+                    var value=keys.getValue(PoastData::class.java)
+                    if (value?.uid==uid)
+                        arlist.add(value!!)
+                }
+                post!!.value=arlist
+            }
+
+        })
+
+        return post
+    }
+
     fun getfollower(uid:String):MutableLiveData<String>{
         val myRef = database.getReference("Follow")
         myRef.child(uid).child("Followers").addValueEventListener(object :ValueEventListener{

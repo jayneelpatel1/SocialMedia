@@ -9,13 +9,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
+import com.jayneel.socialmedia.Adapter.postAdapter
+import com.jayneel.socialmedia.Adapter.profilePostAdapter
 import com.jayneel.socialmedia.Edit_Profile
 import com.jayneel.socialmedia.R
 import com.jayneel.socialmedia.login
 import kotlinx.android.synthetic.main.activity_edit__profile.*
+import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 
 
@@ -47,7 +53,15 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(context,Edit_Profile::class.java))
         }
 
+viewModel.getposts(user!!).observe(viewLifecycleOwner, Observer {
+    it.reverse()
+    profile_post.setText(it.size.toString())
+    var ad= profilePostAdapter(context!!,it)
+    rvuserprofilepost.adapter = ad
+    rvuserprofilepost.layoutManager=
+        GridLayoutManager(context!!.applicationContext,3,RecyclerView.VERTICAL,false)
 
+})
 viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
     profile_follower_count.setText(it)
 })
