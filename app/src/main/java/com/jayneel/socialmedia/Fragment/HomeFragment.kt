@@ -26,7 +26,10 @@ class HomeFragment : Fragment() {
         fun newInstance() = HomeFragment()
     }
 
+    private lateinit var ad: postAdapter
     private lateinit var viewModel: HomeViewModel
+    var postIteamcount:Int=0
+    var lastvisible:Int=0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +41,10 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewMode
+
         viewModel.getpost(refreslayout).observe(viewLifecycleOwner, Observer {
             it.reverse()
-            var ad=postAdapter(context!!,it)
+            ad=postAdapter(context!!,it)
             rvpost.adapter = ad
             rvpost.layoutManager=LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)
         })

@@ -13,6 +13,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.jayneel.socialmedia.R
 import kotlinx.android.synthetic.main.center_profile.*
@@ -53,6 +55,30 @@ class visiterProfile : Fragment() {
                 }
             }
         })
+        visiter_btn_follow.setOnClickListener {
+            var myRef = FirebaseDatabase.getInstance().getReference("Follow")
+            if (visiter_btn_follow.text == "Follow") {
+                myRef.child(firebaseUser).child("Following").child(uid.toString()).setValue(true)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            myRef.child(uid.toString()).child("Followers").child(
+                                firebaseUser
+                            ).setValue(true)
+                        }
+                    }
+            } else {
+                myRef.child(firebaseUser).child("Following").child(uid.toString()).removeValue()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            myRef.child(uid.toString()).child("Followers").child(
+                                firebaseUser
+                            ).removeValue()
+                        }
+                    }
+            }
+            viewModel.chkfollowingstatus(uid!!,visiter_btn_follow!!)
+
+        }
         viewModel.getfollowing(uid!!).observe(viewLifecycleOwner, Observer {
             visitor_following_count.setText(it)
         })
