@@ -1,19 +1,15 @@
 package com.jayneel.socialmedia.Adapter
 
 import android.content.Context
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -26,7 +22,6 @@ import com.jayneel.socialmedia.Model.userModel
 import com.jayneel.socialmedia.R
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.posts_rec.view.*
-import kotlinx.android.synthetic.main.user_iteam_layout.view.*
 
 class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragment:Boolean=false): RecyclerView.Adapter<postAdapter.viewholder>() {
 
@@ -48,8 +43,15 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
     override fun getItemCount(): Int {
         return list.size
     }
+    fun addAll(newUsers:ArrayList<PoastData>) {
+        val initialSize: Int = list.size
+        list.addAll(newUsers)
+        notifyItemRangeInserted(initialSize, newUsers.size)
+    }
 
-
+fun getlastIteamId(): String? {
+   return list[list.size-1].uid
+}
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
         var post=list[position]
