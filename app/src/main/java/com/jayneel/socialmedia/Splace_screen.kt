@@ -14,5 +14,5 @@ class Splace_screen : AppCompatActivity() {
             startActivity(Intent(this,login::class.java))
             finish()
         },3000)
-        }
+    }
     }
