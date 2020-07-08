@@ -20,12 +20,18 @@ class HomeViewModel : ViewModel() {
     val database = FirebaseDatabase.getInstance()
     var firebaseuser=FirebaseAuth.getInstance().currentUser
     var following=MutableLiveData<ArrayList<String>>()
-    var limit=MutableLiveData<Int>(10)
-
-    fun getpost(ref: SwipeRefreshLayout?):MutableLiveData<ArrayList<PoastData>>{
-
+    var limit=10
+    fun getpost(ref: SwipeRefreshLayout?,nodeid:String?):MutableLiveData<ArrayList<PoastData>>{
+        var myRef=database.getReference("Post")
         var r=getfollowin()
-        val myRef = database.getReference("Post").orderByChild("dateTime")
+        if (nodeid==null){
+             myRef.orderByChild("dateTime").limitToLast(limit)
+        }
+        else
+        {
+             myRef.orderByChild("dateTime").startAt(nodeid).limitToLast(limit)
+        }
+
         val post=object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again

@@ -1,24 +1,17 @@
 package com.jayneel.socialmedia.Fragment
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jayneel.socialmedia.Adapter.postAdapter
-import com.jayneel.socialmedia.Adapter.user_Apater
-import com.jayneel.socialmedia.Model.PoastData
-import com.jayneel.socialmedia.Model.userModel
 import com.jayneel.socialmedia.R
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.posts_rec.*
-import kotlinx.android.synthetic.main.search_fragment.*
 
 class HomeFragment : Fragment() {
 
@@ -30,6 +23,9 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     var postIteamcount:Int=0
     var lastvisible:Int=0
+    private var mIsLoading = false
+    private val mPostsPerPage = 5
+    lateinit var layoutManager:LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,14 +38,28 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
-        viewModel.getpost(refreslayout).observe(viewLifecycleOwner, Observer {
+        viewModel.getpost(refreslayout,null).observe(viewLifecycleOwner, Observer {
             ad=postAdapter(context!!,it)
             rvpost.adapter = ad
-            rvpost.layoutManager=LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)
+            layoutManager=LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)
+            rvpost.layoutManager=layoutManager
+        })
+        rvpost.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+               postIteamcount=layoutManager.itemCount
+               lastvisible=layoutManager.findLastVisibleItemPosition()
+                if(!mIsLoading&&postIteamcount<=(lastvisible+mPostsPerPage)){
+                    ad.getlastIteamId()?.let { viewModel.getpost(refreslayout, it) }
+                    mIsLoading=true
+                }
+
+            }
         })
         refreslayout.setOnRefreshListener {
 
-            viewModel.getpost(refreslayout)
+            viewModel.getpost(refreslayout,null)
 
         }
         }
