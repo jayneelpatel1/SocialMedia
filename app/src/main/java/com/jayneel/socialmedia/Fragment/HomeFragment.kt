@@ -43,7 +43,6 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
         viewModel.getpost(refreslayout).observe(viewLifecycleOwner, Observer {
-            it.reverse()
             ad=postAdapter(context!!,it)
             rvpost.adapter = ad
             rvpost.layoutManager=LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)
