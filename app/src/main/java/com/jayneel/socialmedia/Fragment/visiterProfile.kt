@@ -47,7 +47,7 @@ class visiterProfile : Fragment() {
         var uid=sp.getString("profileid","no-userFound")
         viewModel = ViewModelProviders.of(this).get(VisiterProfileViewModel::class.java)
         viewModel.getdata(uid!!)!!.observe(viewLifecycleOwner, Observer {
-            vister_username.setText(it.username)
+            vister_username.setText(it.username.toString())
             visitor_email.setText(it.email)
             if(it.img!="") {
                 val storage = FirebaseStorage.getInstance()
