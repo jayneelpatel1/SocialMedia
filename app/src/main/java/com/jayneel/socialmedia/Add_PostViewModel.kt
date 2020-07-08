@@ -4,13 +4,14 @@ import android.util.Log
 import android.util.TimeUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.*
 import com.jayneel.socialmedia.Model.userModel
+import java.math.BigDecimal
+import java.math.BigInteger
 import java.sql.Timestamp
 import java.time.LocalDateTime
+import kotlin.text.Typography.times
 
 class Add_PostViewModel:ViewModel() {
     val database = FirebaseDatabase.getInstance()
@@ -19,10 +20,11 @@ class Add_PostViewModel:ViewModel() {
 
     fun savedata(uid: String,dis:String,img:String,postid:String,username:String){
 
+        var n=LocalDateTime.now()
         val Post=HashMap<String,Any>()
         Post["uid"]=uid
         Post["disc"]=dis
-        Post["dateTime"]=LocalDateTime.now().toString()
+        Post["dateTime"]="${n.monthValue}${n.dayOfMonth}${n.year}${n.hour}${n.minute}${n.second}${n.nano}".toLong()*-1
         Post["username"]=username
         Post["img"]=img
         Post["postid"]=postid

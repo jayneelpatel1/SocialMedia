@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.jayneel.socialmedia.Model.PoastData
 import com.jayneel.socialmedia.Model.userModel
 import com.jayneel.socialmedia.R
 import kotlinx.android.synthetic.main.visiter_profile_fragment.view.*
@@ -23,6 +24,8 @@ class VisiterProfileViewModel : ViewModel() {
     var btnStatus = MutableLiveData<String>()
     var following = MutableLiveData<String>()
     val database = FirebaseDatabase.getInstance()
+    var post= MutableLiveData<ArrayList<PoastData>>()
+
 
     fun getdata(uid: String): MutableLiveData<userModel>? {
 
@@ -84,7 +87,29 @@ class VisiterProfileViewModel : ViewModel() {
 
         return following
     }
-   fun chkfollowingstatus(uid: String, btn: MaterialButton?) {
+    fun getposts(uid: String):MutableLiveData<ArrayList<PoastData>> {
+        val myRef = database.getReference("Post")
+        myRef.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var arlist=ArrayList<PoastData>()
+                for(keys in snapshot.children){
+                    var value=keys.getValue(PoastData::class.java)
+                    if (value?.uid==uid)
+                        arlist.add(value!!)
+                }
+                post!!.value=arlist
+            }
+
+        })
+
+        return post
+    }
+
+    fun chkfollowingstatus(uid: String, btn: MaterialButton?) {
         val myRef = database.getReference("Follow")
         var followingref=myRef.child(FirebaseAuth.getInstance().currentUser!!.uid).child("Following")
         followingref.addValueEventListener(object :ValueEventListener{

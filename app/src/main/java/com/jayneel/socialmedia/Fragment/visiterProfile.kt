@@ -11,11 +11,14 @@ import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.jayneel.socialmedia.Adapter.profilePostAdapter
 import com.jayneel.socialmedia.R
 import kotlinx.android.synthetic.main.center_profile.*
 import kotlinx.android.synthetic.main.follower_top_profile.*
@@ -55,6 +58,16 @@ class visiterProfile : Fragment() {
                 }
             }
         })
+viewModel.getposts(uid).observe(viewLifecycleOwner, Observer {
+    it.reverse()
+    var ad= profilePostAdapter(context!!,it)
+    rvpostvisiter.adapter = ad
+    rvpostvisiter.layoutManager=
+        GridLayoutManager(context!!.applicationContext,3, RecyclerView.VERTICAL,false)
+
+})
+
+
         visiter_btn_follow.setOnClickListener {
             var myRef = FirebaseDatabase.getInstance().getReference("Follow")
             if (visiter_btn_follow.text == "Follow") {
