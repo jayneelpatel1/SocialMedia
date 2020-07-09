@@ -15,10 +15,17 @@ class Add_PostViewModel:ViewModel() {
     fun savedata(uid: String,dis:String,img:String,postid:String,username:String){
 //        "${n.monthValue}${n.dayOfMonth}${n.year}".toLong()*-1
         var n=LocalDateTime.now()
+        var s=""
+        if(n.second>10) {
+            s=n.second.toString()
+        }
+        else{
+            s="0"+n.second.toString()
+        }
         val Post=HashMap<String,Any>()
         Post["uid"]=uid
         Post["disc"]=dis
-        Post["dateTime"]="${n.format(DateTimeFormatter.BASIC_ISO_DATE)}${n.hour}${n.minute}${n.second}".toLong()*-1
+        Post["dateTime"]="${n.format(DateTimeFormatter.BASIC_ISO_DATE)}${n.hour}${n.minute}${s}".toLong()*-1
         Post["username"]=username
         Post["img"]=img
         Post["postid"]=postid

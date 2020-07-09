@@ -7,10 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.jayneel.socialmedia.Adapter.postAdapter
 import com.jayneel.socialmedia.Model.PoastData
 import com.jayneel.socialmedia.Model.userModel
@@ -20,17 +17,19 @@ class HomeViewModel : ViewModel() {
     val database = FirebaseDatabase.getInstance()
     var firebaseuser=FirebaseAuth.getInstance().currentUser
     var following=MutableLiveData<ArrayList<String>>()
-    var limit=10
+    var limit=3
     fun getpost(ref: SwipeRefreshLayout?,nodeid:String?):MutableLiveData<ArrayList<PoastData>>{
-        var myRef=database.getReference("Post")
+        var myRef:Query?=null
         var r=getfollowin()
-        if (nodeid==null){
-             myRef.orderByChild("dateTime").limitToLast(limit)
-        }
-        else
-        {
-             myRef.orderByChild("dateTime").startAt(nodeid).limitToLast(limit)
-        }
+        //if (nodeid==null){
+          //  data.value?.clear()
+            myRef=database.getReference("Post").orderByChild("dateTime")
+
+        //}
+//        else
+//        {
+//            myRef=database.getReference("Post").orderByChild("dateTime").startAt(nodeid).limitToFirst(limit)
+//        }
 
         val post=object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

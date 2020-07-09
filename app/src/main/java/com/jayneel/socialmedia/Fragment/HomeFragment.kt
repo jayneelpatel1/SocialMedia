@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
     var postIteamcount:Int=0
     var lastvisible:Int=0
     private var mIsLoading = false
-    private val mPostsPerPage = 5
+    private val mPostsPerPage = 3
     lateinit var layoutManager:LinearLayoutManager
 
     override fun onCreateView(
@@ -46,14 +46,16 @@ class HomeFragment : Fragment() {
         })
         rvpost.addOnScrollListener(object :RecyclerView.OnScrollListener(){
 
+
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-               postIteamcount=layoutManager.itemCount
-               lastvisible=layoutManager.findLastVisibleItemPosition()
-                if(!mIsLoading&&postIteamcount<=(lastvisible+mPostsPerPage)){
-                    ad.getlastIteamId()?.let { viewModel.getpost(refreslayout, it) }
-                    mIsLoading=true
-                }
+//               postIteamcount=layoutManager.itemCount
+//               lastvisible=layoutManager.findLastVisibleItemPosition()
+//                var total=ad.itemCount
+//                if(!mIsLoading && (postIteamcount+lastvisible)>=total){
+//                    ad.getlastIteamId()?.let { viewModel.getpost(null, it) }
+//                    mIsLoading=true
+//                }
 
             }
         })

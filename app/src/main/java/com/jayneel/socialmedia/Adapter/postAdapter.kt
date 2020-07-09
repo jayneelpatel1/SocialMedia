@@ -50,7 +50,7 @@ class postAdapter(var ctx: Context, var list: ArrayList<PoastData>, var isFragme
     }
 
 fun getlastIteamId(): String? {
-   return list[list.size-1].uid
+   return list[list.size-1].postid
 }
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
