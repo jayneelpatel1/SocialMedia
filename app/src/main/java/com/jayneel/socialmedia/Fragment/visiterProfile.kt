@@ -1,6 +1,7 @@
 package com.jayneel.socialmedia.Fragment
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.jayneel.socialmedia.Adapter.profilePostAdapter
 import com.jayneel.socialmedia.R
+import com.jayneel.socialmedia.message
 import kotlinx.android.synthetic.main.center_profile.*
 import kotlinx.android.synthetic.main.follower_top_profile.*
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -58,6 +60,11 @@ class visiterProfile : Fragment() {
                 }
             }
         })
+        btnmsg.setOnClickListener {
+            var int1=Intent(context,message::class.java)
+            int1.putExtra("uid",uid.toString())
+            startActivity(int1)
+        }
 viewModel.getposts(uid).observe(viewLifecycleOwner, Observer {
     it.reverse()
     var ad= profilePostAdapter(context!!,it)

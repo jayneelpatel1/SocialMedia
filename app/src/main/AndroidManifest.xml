@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".message"></activity>
         <activity android:name=".Splace_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +24,7 @@
         <activity android:name=".Add_Post" />
         <activity android:name=".Edit_Profile" />
         <activity android:name=".SignUp" />
-        <activity android:name=".login">
-
-        </activity>
+        <activity android:name=".login"></activity>
         <activity android:name=".MainActivity" />
 
         <meta-data

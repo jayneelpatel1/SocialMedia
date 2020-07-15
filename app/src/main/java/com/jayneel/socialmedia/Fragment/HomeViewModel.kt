@@ -18,7 +18,9 @@ class HomeViewModel : ViewModel() {
     var firebaseuser=FirebaseAuth.getInstance().currentUser
     var following=MutableLiveData<ArrayList<String>>()
     var limit=3
+    var lastkey=MutableLiveData<String>()
     fun getpost(ref: SwipeRefreshLayout?,nodeid:String?):MutableLiveData<ArrayList<PoastData>>{
+        getlastKey()
         var myRef:Query?=null
         var r=getfollowin()
         //if (nodeid==null){
@@ -70,6 +72,24 @@ class HomeViewModel : ViewModel() {
         return data
     }
 
+   private fun getlastKey(){
+        var myRef=database.getReference("Post").orderByChild("dateTime")
+        myRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("fb","key not found")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (key in snapshot.children)
+                {
+                    lastkey.value=key.key
+                }
+            }
+
+        })
+
+    }
+
     private fun getfollowin(): MutableLiveData<ArrayList<String>>? {
         val myRef = database.getReference("Follow")
         myRef.child(firebaseuser!!.uid).child("Following").addValueEventListener(object :ValueEventListener{
@@ -89,6 +109,7 @@ class HomeViewModel : ViewModel() {
 
         return following
     }
+
 
 }
 
