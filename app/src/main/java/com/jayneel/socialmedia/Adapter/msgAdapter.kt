@@ -32,7 +32,7 @@ class msgAdapter(var mconttxt:Context,var msg:ArrayList<MsgModel>):RecyclerView.
     }
 
     override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
+       // return super.getItemViewType(position)
         return if(msg[position].sender.equals(firebaseUser))
         {
             1
