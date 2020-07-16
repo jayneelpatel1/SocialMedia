@@ -35,10 +35,10 @@ class msgAdapter(var mconttxt:Context,var msg:ArrayList<MsgModel>):RecyclerView.
        // return super.getItemViewType(position)
         return if(msg[position].sender.equals(firebaseUser))
         {
-            1
+            0
         }
         else
-            0
+            1
     }
     override fun getItemCount(): Int {
       return msg.size
