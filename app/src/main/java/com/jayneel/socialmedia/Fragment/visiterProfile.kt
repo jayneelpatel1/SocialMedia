@@ -20,6 +20,7 @@ import com.jayneel.socialmedia.R
 import com.jayneel.socialmedia.message
 import kotlinx.android.synthetic.main.center_profile.*
 import kotlinx.android.synthetic.main.follower_top_profile.*
+import kotlinx.android.synthetic.main.visiter_profile_fragment.*
 
 class visiterProfile : Fragment() {
 

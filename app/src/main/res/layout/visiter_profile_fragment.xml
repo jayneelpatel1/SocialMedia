@@ -26,7 +26,7 @@
                 android:id="@+id/btnmsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#33B5FF"
+                android:backgroundTint="#7987FA"
                 android:layout_gravity="bottom|right"
                 android:layout_marginLeft="250dp"
                 android:layout_marginTop="620dp"
