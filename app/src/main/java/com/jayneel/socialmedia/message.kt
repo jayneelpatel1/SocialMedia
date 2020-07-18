@@ -113,10 +113,9 @@ class message : AppCompatActivity() {
         var data = MsgModel(msgid, sender, reciver, false, msg)
         if (msgid != null) {
             myref.child(msgid).setValue(data).addOnCompleteListener {
-                var ref = FirebaseDatabase.getInstance().getReference("msglist").child(firebaseUser)
-                var k = ref.push().key
-                ref.child(firebaseUser).setValue(reciver).addOnCompleteListener {
-                    ref.child(firebaseUser).setValue(firebaseUser)
+                var ref = FirebaseDatabase.getInstance().getReference("msglist")
+                ref.child(firebaseUser).child(reciver.toString()).setValue(reciver).addOnCompleteListener {
+                    ref.child(reciver!!).child(firebaseUser).setValue(firebaseUser)
 
                 }
 
