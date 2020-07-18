@@ -25,7 +25,7 @@
                 android:layout_weight="30">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/circleImageView2"
+                    android:id="@+id/msg_img"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_alignParentEnd="true"

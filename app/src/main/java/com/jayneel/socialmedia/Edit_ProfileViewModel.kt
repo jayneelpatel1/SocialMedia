@@ -16,7 +16,10 @@ class Edit_ProfileViewModel:ViewModel() {
 
     val database = FirebaseDatabase.getInstance()
     var data = MutableLiveData<userModel>()
+
     val myRef = database.getReference("user")
+
+
     fun getdata(uid: String): MutableLiveData<userModel>? {
         val userprofile=object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
