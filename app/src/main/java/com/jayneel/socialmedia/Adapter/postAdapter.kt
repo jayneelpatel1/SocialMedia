@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.jayneel.socialmedia.Fragment.ProfileFragment
 import com.jayneel.socialmedia.Fragment.visiterProfile
 import com.jayneel.socialmedia.Model.PoastData
 import com.jayneel.socialmedia.Model.userModel
@@ -54,6 +55,7 @@ fun getlastIteamId(): String? {
 }
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
+        var firebaseid=FirebaseAuth.getInstance().currentUser!!.uid
         var post=list[position]
         if(list[position].img!=""){
             val storage = FirebaseStorage.getInstance()
@@ -65,15 +67,24 @@ fun getlastIteamId(): String? {
         holder.caption.setText(list[position].disc.toString())
         postuserinfo(holder.profileimg,holder.usernmae,list[position].uid!!)
         holder.usernmae.setOnClickListener {
-            var sp=ctx.getSharedPreferences("sp",Context.MODE_PRIVATE).edit()
-            sp.putString("profileid",list[position].uid)
-            sp.putString("username",list[position].username)
-            sp.apply()
-            sp.commit()
+           if (!list[position].uid.equals(firebaseid))
+           {
+               var sp=ctx.getSharedPreferences("sp",Context.MODE_PRIVATE).edit()
+               sp.putString("profileid",list[position].uid)
+               sp.putString("username",list[position].username)
+               sp.apply()
+               sp.commit()
 
-            (ctx as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.fragnent_container,
-                visiterProfile()
-            ).commit()
+               (ctx as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.fragnent_container,
+                   visiterProfile()
+               ).commit()
+           }
+            else if (list[position].uid.equals(firebaseid))
+           {
+               (ctx as FragmentActivity).supportFragmentManager.beginTransaction().replace(R.id.fragnent_container,
+                   ProfileFragment()
+               ).commit()
+           }
         }
         getlike(holder.btnlike,post.postid)
         holder.btnlike.setOnClickListener {

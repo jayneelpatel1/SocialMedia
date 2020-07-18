@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,7 +25,9 @@ class MainActivity : AppCompatActivity() {
     }
    private fun movetoFragment(fragment:Fragment){
        val fragmrntTrans=supportFragmentManager.beginTransaction()
-       fragmrntTrans.replace(R.id.fragnent_container,fragment)
+       fragmrntTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+       fragmrntTrans.replace(R.id.fragnent_container,fragment,"back")
+       fragmrntTrans.addToBackStack("back")
         fragmrntTrans.commit()
     }
     private val onNavigationItemSelectedListener=BottomNavigationView.OnNavigationItemSelectedListener {

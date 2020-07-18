@@ -73,6 +73,7 @@ viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
             profile_full_name.setText(it.name)
             toolbarprofile.title=(it.username)
             profile_email.setText(it.email)
+            biop.setText(it.bio)
             if(it.img!="") {
                 val storage = FirebaseStorage.getInstance()
                 val storageReference = storage.getReferenceFromUrl(it.img!!)

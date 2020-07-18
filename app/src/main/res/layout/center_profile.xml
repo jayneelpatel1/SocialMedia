@@ -59,7 +59,7 @@
             android:padding="15dp">
 
             <TextView
-                android:id="@+id/vister_username"
+                android:id="@+id/vister_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="User Name"
@@ -70,7 +70,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
