@@ -99,9 +99,9 @@ class VisiterProfileViewModel : ViewModel() {
                 for(keys in snapshot.children){
                     var value=keys.getValue(PoastData::class.java)
                     if (value?.uid==uid)
-                        arlist.add(value!!)
+                        arlist.add(value)
                 }
-                post!!.value=arlist
+                post.value=arlist
             }
 
         })
