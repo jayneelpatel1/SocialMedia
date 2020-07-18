@@ -1,5 +1,7 @@
 package com.jayneel.socialmedia.Fragment
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jayneel.socialmedia.Adapter.postAdapter
 import com.jayneel.socialmedia.R
+import com.jayneel.socialmedia.message
+import com.jayneel.socialmedia.messagelist
 import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment() {
@@ -44,6 +48,10 @@ class HomeFragment : Fragment() {
             layoutManager=LinearLayoutManager(context!!.applicationContext, RecyclerView.VERTICAL, false)
             rvpost.layoutManager=layoutManager
         })
+        btndone.setOnClickListener {
+            var int1=Intent(context, messagelist::class.java)
+            startActivity(int1)
+        }
         rvpost.addOnScrollListener(object :RecyclerView.OnScrollListener(){
 
 

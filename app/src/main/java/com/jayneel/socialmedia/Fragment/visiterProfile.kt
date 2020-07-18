@@ -8,15 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.LinearLayout
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.jayneel.socialmedia.Adapter.profilePostAdapter
@@ -24,8 +20,6 @@ import com.jayneel.socialmedia.R
 import com.jayneel.socialmedia.message
 import kotlinx.android.synthetic.main.center_profile.*
 import kotlinx.android.synthetic.main.follower_top_profile.*
-import kotlinx.android.synthetic.main.profile_fragment.*
-import kotlinx.android.synthetic.main.visiter_profile_fragment.*
 
 class visiterProfile : Fragment() {
 
@@ -56,7 +50,7 @@ class visiterProfile : Fragment() {
                 val storageReference = storage.getReferenceFromUrl(it.img!!)
 
                 storageReference.downloadUrl.addOnSuccessListener {
-                    Glide.with(this).load(it.toString()).into(circleImageView2).view
+                    Glide.with(this).load(it.toString()).into(msg_img).view
                 }
             }
         })

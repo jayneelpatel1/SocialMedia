@@ -55,7 +55,6 @@ class ProfileViewModel : ViewModel() {
             override fun onCancelled(error: DatabaseError) {
 
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 var arlist=ArrayList<PoastData>()
                 for(keys in snapshot.children){
