@@ -90,12 +90,12 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/visiter_btn_follow"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="43dp"
             android:text="follow"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnmsg"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.37"
             app:layout_constraintStart_toStartOf="@+id/unfollow"
             app:layout_constraintTop_toTopOf="parent"
@@ -114,14 +114,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone"/>
 
-        <Button
-            android:id="@+id/btnmsg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
-            android:text="message"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="38dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

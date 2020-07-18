@@ -92,11 +92,14 @@
 
 
         </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/relLayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="566dp"
             android:layout_below="@+id/linLayout2"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="-46dp"
             android:layout_marginBottom="50dp">
 
             <androidx.recyclerview.widget.RecyclerView
