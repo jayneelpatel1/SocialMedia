@@ -44,8 +44,10 @@ class visiterProfile : Fragment() {
         var uid=sp.getString("profileid","no-userFound")
         viewModel = ViewModelProviders.of(this).get(VisiterProfileViewModel::class.java)
         viewModel.getdata(uid!!)!!.observe(viewLifecycleOwner, Observer {
-            vister_username.setText(it.username.toString())
+            vister_name.text=it.name
             visitor_email.setText(it.email)
+            bio.setText(it.bio)
+
             if(it.img!="") {
                 val storage = FirebaseStorage.getInstance()
                 val storageReference = storage.getReferenceFromUrl(it.img!!)
@@ -62,6 +64,7 @@ class visiterProfile : Fragment() {
         }
 viewModel.getposts(uid).observe(viewLifecycleOwner, Observer {
     it.reverse()
+    textView15.setText(it.size.toString())
     var ad= profilePostAdapter(context!!,it)
     rvpostvisiter.adapter = ad
     rvpostvisiter.layoutManager=
@@ -91,7 +94,7 @@ viewModel.getposts(uid).observe(viewLifecycleOwner, Observer {
                         }
                     }
             }
-            viewModel.chkfollowingstatus(uid!!,visiter_btn_follow!!)
+            viewModel.chkfollowingstatus(uid,visiter_btn_follow!!)
 
         }
         viewModel.getfollowing(uid!!).observe(viewLifecycleOwner, Observer {
