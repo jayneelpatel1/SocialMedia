@@ -1,12 +1,14 @@
 package com.jayneel.socialmedia.Adapter
 
 import android.app.Activity
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jayneel.socialmedia.Model.chatlistModel
 import com.jayneel.socialmedia.Model.userModel
 import com.jayneel.socialmedia.R
+import com.jayneel.socialmedia.message
 import kotlinx.android.synthetic.main.msglist.view.*
 
 class chatlistAdapter(var ctx:Activity,var arlist:ArrayList<userModel>):RecyclerView.Adapter<chatlistAdapter.viewholder>()
@@ -28,5 +30,10 @@ class chatlistAdapter(var ctx:Activity,var arlist:ArrayList<userModel>):Recycler
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
         holder.usernmae.text=arlist[position].username.toString()
+        holder.itemView.setOnClickListener {
+            var int1= Intent(ctx, message::class.java)
+            int1.putExtra("uid",arlist[position].uid.toString())
+            ctx.startActivity(int1)
+        }
     }
 }
