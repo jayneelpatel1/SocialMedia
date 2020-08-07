@@ -44,6 +44,8 @@ class ProfileFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
 
+
+
         var user=FirebaseAuth.getInstance().currentUser?.uid
 
 
@@ -58,8 +60,7 @@ viewModel.getposts(user!!).observe(viewLifecycleOwner, Observer {
     profile_post.setText(it.size.toString())
     var ad= profilePostAdapter(context!!,it)
     rvuserprofilepost.adapter = ad
-    rvuserprofilepost.layoutManager=
-        GridLayoutManager(context!!.applicationContext,3,RecyclerView.VERTICAL,false)
+    rvuserprofilepost.layoutManager= GridLayoutManager(context!!.applicationContext,3,RecyclerView.VERTICAL,false)
 
 })
 viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
