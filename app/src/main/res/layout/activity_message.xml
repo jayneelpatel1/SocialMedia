@@ -60,7 +60,7 @@
         android:layout_marginBottom="3dp"
         android:clickable="true"
         android:src="@drawable/ic_baseline_send_24"
-        app:backgroundTint="#33B5FF"
+        app:backgroundTint="#7987FA"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
