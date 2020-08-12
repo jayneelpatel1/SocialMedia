@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.google.firebase.FirebaseApiNotAvailableException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -24,7 +25,6 @@ class login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         button3.setOnClickListener {
             startActivity(Intent(this, SignUp::class.java))
-            finish()
         }
         //login button
         button2.setOnClickListener {
@@ -52,7 +52,15 @@ class login : AppCompatActivity() {
 
     }
     private fun updateUi(user: FirebaseUser?) {
-        startActivity(Intent(this,MainActivity::class.java))
-        finish()
+        if(user!!.isEmailVerified)
+        {
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
+        else{
+            user.sendEmailVerification()
+            Toast.makeText(this,"Verify email first",Toast.LENGTH_LONG).show()
+        }
+
     }
 }
