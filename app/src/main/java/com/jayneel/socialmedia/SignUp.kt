@@ -60,6 +60,7 @@ class SignUp : AppCompatActivity() {
                                 hashMap["email"]=email
                                 hashMap["uid"]=user!!.uid
                                 hashMap["name"]=name
+                                hashMap["img"]="gs://socialmedia-8e84c.appspot.com/Profile_pic/default-FFA-avatar.png"
 
                                 var myref=FirebaseDatabase.getInstance().getReference("user")
                                 myref.child(user!!.uid.toString()).setValue(hashMap).addOnCompleteListener {
@@ -92,7 +93,17 @@ class SignUp : AppCompatActivity() {
     }
 
     private fun updateUi(user: FirebaseUser?) {
-        startActivity(Intent(this,MainActivity::class.java))
-        finish()
+        if(user!!.isEmailVerified)
+        {
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
+        else{
+            user.sendEmailVerification()
+            Toast.makeText(this,"Verification mail sent your mail",Toast.LENGTH_LONG).show()
+            startActivity(Intent(this,login::class.java))
+
+        }
+
     }
 }

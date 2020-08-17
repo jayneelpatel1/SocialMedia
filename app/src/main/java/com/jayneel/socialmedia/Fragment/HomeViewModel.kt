@@ -45,13 +45,15 @@ class HomeViewModel : ViewModel() {
                 var count=dataSnapshot.childrenCount.toInt()
                 for(snap in dataSnapshot.children){
                     val value = snap.getValue(PoastData::class.java)!!
-                    for (follow in following.value!!.iterator()){
-                        if (value.uid.toString().equals(follow)){
-                            arlis.add(value)
-                            Log.d("TAG", "Value is: $value")
-                        }
+                  if(following.value!=null) {
+                      for (follow in following.value!!.iterator()) {
+                          if (value.uid.toString().equals(follow)) {
+                              arlis.add(value)
+                              Log.d("TAG", "Value is: $value")
+                          }
 
-                    }
+                      }
+                  }
                     if (value.uid.toString().equals(firebaseuser!!.uid)){
                         arlis.add(value)
 
