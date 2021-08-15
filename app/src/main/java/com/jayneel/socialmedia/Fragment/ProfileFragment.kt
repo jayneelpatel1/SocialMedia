@@ -3,6 +3,7 @@ package com.jayneel.socialmedia.Fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,18 +70,21 @@ viewModel.getfollower(user!!)?.observe(viewLifecycleOwner, Observer {
         viewModel.getfollowing(user!!)?.observe(viewLifecycleOwner, Observer {
             profile_following_count.setText(it)
         })
-        viewModel.getdata(user!!)?.observe(viewLifecycleOwner, Observer {
+        viewModel.getdata(user!!)?.observe(viewLifecycleOwner, Observer { it ->
             progressBar2.visibility=View.VISIBLE
             profile_full_name.setText(it.name)
             toolbarprofile.title=(it.username)
             profile_email.setText(it.email)
             biop.setText(it.bio)
+
             if(it.img!="") {
                 val storage = FirebaseStorage.getInstance()
                 val storageReference = storage.getReferenceFromUrl(it.img!!)
-
                 storageReference.downloadUrl.addOnSuccessListener {
-                    Glide.with(this).load(it.toString()).into(circleImageView).view
+                    if (it!=null)
+                        Log.d("Ex","Crash")
+                    else
+                        Glide.with(this).load(it.toString()).into(circleImageView).view
                 }
             }
 
